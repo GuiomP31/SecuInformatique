@@ -1,0 +1,135 @@
+Login : 
+	lettres minuscules non accentuées et de chiffres
+	commence par une lettre minuscule non accentuée
+	contient de 3 à 12 caractères
+
+	Note : dans la partie cliente, un script en javascript va réécrire le login en minuscules avant de l'envoyer au serveur.
+
+regex : ^[a-z][a-z[:digit:]]{2,11}$
+
+
+Nom complet :
+	lettres accentuées
+	autres caractères : - ' . <espace>
+	contient de 3 à 55 caractères
+
+regex : ^[-'. [:alpha:]]{3,55}$
+
+
+Age :
+	chiffres
+	2 chiffres min / max 3 chiffres
+
+regex : ^[[:digit:]]{2,3}$
+
+
+Code postal français :
+	chiffres
+	5 chiffres exactement
+
+Note : au niveau du navigateur, un script completera avec un 0 devant si l'utilisateur n'a mis que 4 chiffres.
+Par ex : 1234 => 01234
+Note 2 : pour la corse, pas de gestion de A/B
+
+regex : ^[[:digit:]]{5}$
+
+
+Numéro de téléphone français :
+
+	10 chiffres
+
+Note : un script au niveau du navigateur va supprimer les caractères autres que des chiffres et envoyer les 10 chiffres entrés par l'utilisateur.
+05.06.07.08.09
+06-78-90-12-34
+07 10 11 12 13
+08901234567
+
+regex : ^[[:digit:]]{10}$
+
+
+Métier (description)
+	lettres accentuées
+	autres caractères : - ' . <espace>
+	contient de 3 à 55 caractères
+
+Note: c'est la même chose que le nom complet.
+
+regex : ^[-'. [:alpha:]]{3,55}$
+
+
+nom du groupe :
+	lettres minuscules non accentuées et de chiffres
+	commence par une lettre minuscule non accentuée
+	contient de 3 à 12 caractères
+
+Note : c'est la même chose que le login
+
+regex : ^[a-z][a-z[:digit:]]{2,11}$
+
+
+description du groupe :
+	lettres accentuées
+	autres caractères : - ' . <espace>
+	contient de 3 à 55 caractères
+
+Note : c'est la même chose que le nom complet de l'utilisateur.
+
+regex : ^[-'. [:alpha:]]{3,55}$
+
+
+Expression rationnelle = regular expression (regex)
+
+
+
+
+Scripts & risques
+
+s'authentifier
+. entrée :
+  login
+  mdp
+. sortie :
+  imprime "bonjour <login>" vers l'utilisateur
+. risques :
+  * injection SQL (SQLi) : oui : login => requête paramétrée
+   note : seul le login est utilisé en SQL pour récupérer l'image du mdp stockée
+  * XSS : oui : login => encoder le login retourné à l'utilisateur
+
+changer son mdp
+. entrée :
+  ancien mdp
+  nouveau mdp x2
+  note : le login est récupéré via la session de l'utilisateur
+  note : aucun mdp est utilisé tel quel dans une requete SQL, le nouveau mdp est haché avant d'être stocké en base.
+  note : ds ts les cas on utilise une requête paramétrée pour contrer des risques inconnus
+. sortie : rien
+
+se déconnecter
+ . entrée : rien
+ . sortie : rien
+
+
+créer un groupe :
+. entrée : nom, description
+  SQLi : oui : nom, description => requêtes paramétrées
+. sortie : "KO <groupe> existe déjà"
+  XSS : oui : groupe => encoder groupe qq il est retourné
+
+créer un utilisateur :
+ . entrée : login, nom complet, age...
+   SQLi : oui : login, nom complet... => requête paramétrée
+ . sortie : imprimer "OK utilisateur <login> a été créé", "erreur <login> existe"
+   XSS : oui : login => encoder login lorsqu'il est retourné.
+
+changer le groupe :
+ . entrée : login, nouveau groupe
+   SQLi : oui : login & nouveau groupe => requêtes paramétrées
+ . sortie : "OK", "groupe <groupe> inexistant"
+   XSS : oui : groupe => encoder <groupe>
+
+changer le mdp d'un utilisateur
+ . entrée : login, nouveau mdp x2
+   SQLi : login : oui => requête paramétrée
+ . sortie : "KO <login> inexistant" 
+   XSS : oui : login => encoder le <login> qd il est retourné
+   

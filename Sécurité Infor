@@ -1,0 +1,67 @@
+Sécurité Informatique              30 Avril 2020
+
+ Expression rationnelle = regex
+
+
+ -Login : lettres minuscules et de chiffres
+  commence par une letrre minuscule et contient de 3 à 12 caractères
+  regex : ^[[:lower:]][[:lower:][:digit:]]{2,11}$
+  
+  
+ -Nom complet: lettres majuscules et lettres minuscules
+  contient de 3 à 50 caractères
+  commence par une lettre majuscule et contient lettres minuscules
+  regex: ^[[:alpha:]]{3,50}$
+ 
+ 
+ -Age : chiffres
+  2 chiffres minimun car personne majeure, maximun 3 chiffres si centenaire
+  regex : ^[[:digit:]]{2,3}$	
+ 
+ 
+
+ -Code postal (français) : chiffres
+  5 chiffres 
+  regex : ^[[:digit:]]{5}$
+   
+   
+   
+ -Numéro de téléphone (français) : chiffres
+  10 chiffres
+  regex : ^[[:digit:]]{10}$
+   
+   
+   
+ -Métier : lettre majuscule et lettres minuscules
+  commence par lettre majuscule et contient lettres minuscules
+  contient de 3 à 50 caractères
+  regex :  ^[[:alpha:]]{3,50}$ 
+  
+  
+  
+ -Nom de groupe : lettres minuscules et de chiffres
+  commence par une letrre minuscule et contient de 3 à 12 caractères
+  regex : ^[[:lower:]][[:lower:][:digit:]]{2,11}$
+  
+  
+  
+ -Description du groupe : lettres majuscules et lettres minuscules
+  contient de 3 à 50 caractères
+  commence par une lettre majuscule et contient lettres minuscules
+  regex: ^[[:alpha:]]{3,50}$
+  
+  
+  
+ -Scripts et risques :
+  s'authentifier
+  entrée : login, mot de passe
+  sortie : login
+  
+  
+ -Changer mot de passe :
+ entrée ancien mot de passe
+ nouveau mot de passe * 2
+
+  
+  
+  
